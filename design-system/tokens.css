@@ -1,0 +1,37 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --color-fg: #1e293b; /** Default text color on light backgrounds. */
+  --color-bg: #ffffff; /** Default page and surface background. */
+  --color-bg-subtle: #f8fafc; /** Secondary surface background, used behind cards and panels. */
+  --color-primary: #2563eb; /** Primary brand/action color for booking and other key actions. */
+  --color-primary-hover: #1d4ed8; /** Hover/active state of the primary action color. */
+  --color-on-primary: #ffffff; /** Text/icon color on top of the primary color. */
+  --color-border: #e2e8f0; /** Default border color for cards, inputs, and dividers. */
+  --color-danger: #b91c1c; /** Destructive actions and error states, e.g. cancel booking. */
+  --color-success: #167948; /** Confirmation states, e.g. a booking or payment succeeded. */
+  --color-muted: #64748b; /** Secondary/helper text, e.g. form hints and timestamps. */
+  --space-1: 4px; /** Smallest spacing unit, e.g. gap between an icon and a label. */
+  --space-2: 8px; /** Default spacing between related inline elements. */
+  --space-3: 16px; /** Default spacing between stacked elements, e.g. form fields. */
+  --space-4: 24px; /** Spacing between distinct sections of a page. */
+  --radius-sm: 4px; /** Corner radius for chips and small controls. */
+  --radius-md: 8px; /** Corner radius for buttons and form inputs. */
+  --radius-lg: 12px; /** Corner radius for cards and panels. */
+  --font-size-sm: 13px; /** Small text, e.g. helper text and metadata. */
+  --font-size-md: 15px; /** Default body text size. */
+  --font-size-lg: 20px; /** Section headings and emphasized amounts, e.g. room rates. */
+  --font-family-base: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; /** Default typeface across the guest site and back office. */
+  --font-weight-regular: 400;
+  --font-weight-bold: 600;
+  --border-width-default: 1px; /** Default border width for cards, inputs, and chips. */
+  --button-primary-background: var(--color-primary); /** Background of the primary button, e.g. Book now, Save. */
+  --button-primary-background-hover: var(--color-primary-hover); /** Background of the primary button on hover/active. */
+  --button-primary-foreground: var(--color-on-primary); /** Text/icon color on the primary button. */
+  --button-primary-radius: var(--radius-md); /** Corner radius of buttons. */
+  --card-default-background: var(--color-bg); /** Background of a card, e.g. a room type or reservation card. */
+  --card-default-border: var(--color-border); /** Border of a card. */
+  --card-default-radius: var(--radius-lg); /** Corner radius of a card. */
+}
