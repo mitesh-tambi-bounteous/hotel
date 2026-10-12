@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hotel Design System — Style Guide</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="prototype-utils.css">
+<style>
+  .sg-section { max-width: 960px; margin: 0 auto; padding: var(--space-4) var(--space-3); }
+  .sg-section h2 { font-size: var(--font-size-lg); border-bottom: var(--border-width-default) solid var(--color-border); padding-bottom: var(--space-2); }
+  .sg-grid { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+  .sg-swatch { width: 160px; }
+  .sg-swatch-color { height: 64px; border-radius: var(--radius-md); border: var(--border-width-default) solid var(--color-border); }
+  .sg-swatch-label { font-size: var(--font-size-sm); margin-top: var(--space-1); }
+  .sg-dim { background: var(--color-primary); border-radius: var(--radius-sm); }
+  .sg-row { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-2); }
+  .sg-guidelines h3 { font-size: var(--font-size-md); margin-bottom: var(--space-1); }
+  .sg-guidelines li { margin-bottom: var(--space-1); }
+</style>
+</head>
+<body>
+
+<header class="sg-section">
+  <h1>Hotel Design System</h1>
+  <p class="field-hint">Tokens, components, and UI guidelines for the guest booking site and staff back office.</p>
+</header>
+
+<section class="sg-section">
+  <h2>Colors</h2>
+  <div class="sg-grid">
+    <div class="sg-swatch">
+      <div class="sg-swatch-color" style="background: var(--color-fg);"></div>
+      <div class="sg-swatch-label">color-fg</div>
+    </div>
+    <div class="sg-swatch">
+      <div class="sg-swatch-color" style="background: var(--color-bg);"></div>
+      <div class="sg-swatch-label">color-bg</div>
+    </div>
+    <div class="sg-swatch">
+      <div class="sg-swatch-color" style="background: var(--color-bg-subtle);"></div>
+      <div class="sg-swatch-label">color-bg-subtle</div>
+    </div>
+    <div class="sg-swatch">
+      <div class="sg-swatch-color" style="background: var(--color-primary);"></div>
+      <div class="sg-swatch-label">color-primary</div>
+    </div>
+    <div class="sg-swatch">
+      <div class="sg-swatch-color" style="background: var(--color-primary-hover);"></div>
+      <div class="sg-swatch-label">color-primary-hover</div>
+    </div>
+    <div class="sg-swatch">
+      <div class="sg-swatch-color" style="background: var(--color-on-primary); border: 1px solid var(--color-border);"></div>
+      <div class="sg-swatch-label">color-on-primary</div>
+    </div>
+    <div class="sg-swatch">
+      <div class="sg-swatch-color" style="background: var(--color-border);"></div>
+      <div class="sg-swatch-label">color-border</div>
+    </div>
+    <div class="sg-swatch">
+      <div class="sg-swatch-color" style="background: var(--color-danger);"></div>
+      <div class="sg-swatch-label">color-danger</div>
+    </div>
+    <div class="sg-swatch">
+      <div class="sg-swatch-color" style="background: var(--color-success);"></div>
+      <div class="sg-swatch-label">color-success</div>
+    </div>
+    <div class="sg-swatch">
+      <div class="sg-swatch-color" style="background: var(--color-muted);"></div>
+      <div class="sg-swatch-label">color-muted</div>
+    </div>
+  </div>
+  <p style="margin-top: var(--space-3);">
+    <span style="color: var(--color-fg); background: var(--color-bg); padding: var(--space-1) var(--space-2);">
+      color-fg on color-bg — body text sample (AA contrast for normal text)
+    </span>
+  </p>
+</section>
+
+<section class="sg-section">
+  <h2>Spacing</h2>
+  <div class="sg-row"><div class="sg-dim" style="width: var(--space-1); height: var(--space-1);"></div><span>space-1 (4px)</span></div>
+  <div class="sg-row"><div class="sg-dim" style="width: var(--space-2); height: var(--space-2);"></div><span>space-2 (8px)</span></div>
+  <div class="sg-row"><div class="sg-dim" style="width: var(--space-3); height: var(--space-3);"></div><span>space-3 (16px)</span></div>
+  <div class="sg-row"><div class="sg-dim" style="width: var(--space-4); height: var(--space-4);"></div><span>space-4 (24px)</span></div>
+</section>
+
+<section class="sg-section">
+  <h2>Radii</h2>
+  <div class="sg-grid">
+    <div class="sg-dim" style="width: 80px; height: 48px; border-radius: var(--radius-sm);"></div>
+    <div class="sg-dim" style="width: 80px; height: 48px; border-radius: var(--radius-md);"></div>
+    <div class="sg-dim" style="width: 80px; height: 48px; border-radius: var(--radius-lg);"></div>
+  </div>
+</section>
+
+<section class="sg-section">
+  <h2>Type scale</h2>
+  <p style="font-size: var(--font-size-sm);">font-size-sm — helper text and metadata</p>
+  <p style="font-size: var(--font-size-md);">font-size-md — default body text</p>
+  <p style="font-size: var(--font-size-lg); font-weight: var(--font-weight-bold);">font-size-lg — section headings and rates</p>
+</section>
+
+<section class="sg-section">
+  <h2>Buttons</h2>
+  <div class="sg-row">
+    <button class="button button-primary">Book now</button>
+    <button class="button button-secondary">View details</button>
+    <button class="button button-danger">Cancel booking</button>
+  </div>
+</section>
+
+<section class="sg-section">
+  <h2>Cards</h2>
+  <div class="card" style="max-width: 320px;">
+    <div class="card-title">Deluxe King Room</div>
+    <div class="card-meta">Free cancellation until 24h before arrival</div>
+    <p style="font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); margin: var(--space-2) 0;">$149 / night</p>
+    <button class="button button-primary">Select room</button>
+  </div>
+</section>
+
+<section class="sg-section">
+  <h2>Chips</h2>
+  <div class="sg-row">
+    <span class="chip">Pending</span>
+    <span class="chip chip-success">Confirmed</span>
+    <span class="chip chip-danger">Cancelled</span>
+  </div>
+</section>
+
+<section class="sg-section">
+  <h2>Form controls</h2>
+  <div class="field" style="max-width: 320px;">
+    <label class="field-label" for="sg-email">Email address</label>
+    <input class="input" id="sg-email" type="email" placeholder="guest@example.com">
+    <span class="field-hint">We'll send your confirmation here.</span>
+  </div>
+</section>
+
+<section class="sg-section sg-guidelines">
+  <h2>UI guidelines</h2>
+
+  <h3>Navigation and information architecture</h3>
+  <ul>
+    <li><strong>Guest site</strong>: a top bar only (search, account menu), no sidebar, because the guest journey is a short linear funnel (search → room → book → confirm) that a sidebar would clutter.</li>
+    <li><strong>Back office</strong>: a persistent left sidebar with top-level sections Reservations, Rooms &amp; Rates, Guests, Billing, and Reports, because staff jump between these sections all day and a sidebar keeps them one click away during a live check-in queue.</li>
+    <li>The back office always shows a top bar with the current user and property name, because more than one property may exist in future and staff must never be unsure which one they're editing.</li>
+  </ul>
+
+  <h3>Layout and density</h3>
+  <ul>
+    <li>The back office is data-dense (compact rows, tables over cards) because front-desk staff scan many reservations at once, often on a shared desktop monitor.</li>
+    <li>The guest site is spacious (cards, generous spacing) because it is a consumer, trust-building purchase flow, not a work tool.</li>
+    <li>Back office layouts assume a minimum 1280px-wide desktop/tablet viewport, because front-desk PCs and tablets are the only devices staff use.</li>
+    <li>The guest site must work down to a 375px mobile viewport, because guests frequently book from their phone.</li>
+  </ul>
+
+  <h3>Component usage</h3>
+  <ul>
+    <li>Use <code>.card</code> for anything a guest browses and chooses between (room types, rate options, confirmation summaries), because each is a self-contained, comparable unit.</li>
+    <li>Use a table (not <code>.card</code>) for any back-office list a staff member scans, sorts, or bulk-acts on (reservations, arrivals/departures, invoices), because rows let staff compare many records at a glance.</li>
+    <li>Use <code>.chip</code> for status (confirmed, checked-in, refunded, overdue) wherever a reservation, payment, or invoice is listed, because status is the first thing staff and guests look for.</li>
+    <li>Use <code>.button-primary</code> for the one key action per screen (Book now, Check in, Save rate); use <code>.button-secondary</code> for alternate actions; reserve <code>.button-danger</code> for destructive, hard-to-undo actions (cancel booking, void invoice), because a single clear primary action avoids hesitation at the moment of commitment or during a busy front-desk shift.</li>
+    <li>Use <code>.field</code> and <code>.input</code> for every form control across both apps, because booking and back-office data entry must look and behave identically to feel like one product.</li>
+  </ul>
+
+  <h3>Theme</h3>
+  <ul>
+    <li>Light theme only, for both apps, because the back office runs on front-desk PCs under normal office lighting and the guest site prioritizes trust and legibility over a dark aesthetic.</li>
+  </ul>
+
+  <h3>Voice and tone</h3>
+  <ul>
+    <li>Guest-facing copy is warm and reassuring, plain language, no jargon (e.g. "Your room is booked" not "Reservation created"), because guests are making a purchase and may be anxious about cancellation or payment.</li>
+    <li>Back-office copy is terse and operational (e.g. "Room 204 — checked in 14:32"), because staff read it quickly, often mid-conversation with a guest at the desk.</li>
+    <li>Error messages always state what to do next (e.g. "Card declined — try another card or pay at the desk"), because both guests and staff need to resolve the issue immediately, not just be told it failed.</li>
+  </ul>
+</section>
+
+</body>
+</html>
