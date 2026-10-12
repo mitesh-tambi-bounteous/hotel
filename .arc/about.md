@@ -1,61 +1,83 @@
 # hotel
 
 ## What it is
+A web application for a single, independent hotel. It has two parts:
 
-The booking website for a single hotel. It covers one property's rooms and rates, and is not a
-multi-property marketplace. Greenfield build. Source: intake HOTEL-INTAKE-006.
+- Guest booking site: guests can search availability, see room types and rates, book online, and manage their reservation and account (view, modify, cancel).
+- Staff back office: front-desk and management staff can manage rooms and inventory, rates, reservations, check-in and check-out, walk-ins, and phone bookings.
 
-Who it's for:
-- **Guests** search the hotel's rooms by dates, guest count and filters. They open room detail
-  pages and book a room. The booking shows an estimated price. Payment happens **at the property
-  on arrival**; there is no online payment processing.
-- **Guest checkout is the main path.** Guests enter name, email and phone, and get a
-  confirmation code to look the booking up later. Accounts are optional, so repeat guests can see
-  past and upcoming bookings in one place.
-- Guests can **cancel or modify** (dates/room) a booking themselves up to a cutoff before
-  check-in. They do this with their confirmation code or by signing in. Staff configure the cutoff
-  window.
-- **Hotel staff** use an Admin / Back Office to manage room types, amenities, photos, rates and
-  the availability calendar, and to view and act on incoming bookings.
+Payments are part of both parts. Guests pay or pre-authorise a card online when they book. Walk-ins and staff-created bookings can be paid later at the front desk. Refunds and invoices are handled in the back office.
 
-Capability areas (epics): Search & Availability Lookup (HOTEL-EPIC-014), Room Catalog &
-Availability (HOTEL-EPIC-015), Booking & Reservations (HOTEL-EPIC-016), Guest Accounts &
-Authentication (HOTEL-EPIC-017), Admin / Back Office (HOTEL-EPIC-018).
+The epics are Guest Booking & Account, Front Desk & Reservations Ops, Room & Rate Management, and Payments & Billing.
 
-Out of scope for v1: online payments/billing, group or block bookings (individual reservations
-only), guest reviews/ratings, multi-property listings. Also out of scope unless decided otherwise:
-channel-manager/OTA sync and corporate booking workflows.
+<!-- What the product does, and who it's for. -->
 
 ## Expected scale
+Assumed. One property with roughly 50–150 rooms.
+
+- Today: about 5–20 staff users, around 2–5k guest visits a month, and around 300–1,000 bookings a month.
+- In a year: the same property, with traffic up 2–3× from marketing. That is still well under 10 requests a second at peak, with a short-lived 5–10× spike during promotions or holidays.
+- Data: under 10 GB (reservations, guest profiles, invoices). Payment card data is never stored by us.
 
 <!-- Users, traffic, data volume — today and in a year. -->
-<!-- Not covered in intake. Deferred to planning: "What scale, uptime and backup/recovery
-     expectations apply to the booking site and its data?" -->
 
 ## Availability
+Assumed.
 
-<!-- Uptime expectations, maintenance windows, what happens when it's down. -->
-<!-- Not covered in intake. This is part of the same deferred scale/uptime/backup-recovery question. -->
+- Guest site: 99.9% uptime target, about 43 minutes of downtime a month. Downtime means lost direct bookings, which fall back to OTAs and phone.
+- Back office: 99.9% during operating hours, which is 24/7 because the front desk never closes.
+- Maintenance: windows between 02:00 and 05:00 local time, announced 48 hours ahead.
+- Front desk fallback: a read-only arrivals/departures list that can be printed or exported, so check-in can continue during an outage.
+- Recovery targets: RPO 15 minutes and RTO 4 hours.
 
 ## Compliance and data residency
+Assumed.
 
-<!-- Regulations, certifications, where data must live. -->
-<!-- Not decided in intake. Known facts: the site collects guest PII (name, email, phone). It
-     handles no card data because payment is at the property. Deferred to planning: "What data
-     retention and privacy rules apply to guest PII collected during checkout?" -->
+- PCI DSS SAQ-A: card data goes only through the payment provider's hosted fields or redirect, and we never store or handle a card number (PAN).
+- GDPR or the local equivalent: consent for marketing, guest data export and deletion on request, and retention rules for guest records. Guest-ID scans at check-in, if required by local law, are encrypted and auto-purged.
+- Invoices must meet local tax and VAT rules.
+- Data residency: all data stays in the hotel's home region, for example the EU for an EU hotel.
+- Accessibility: the guest site targets WCAG 2.1 AA.
+
 
 ## Hosting constraints
+Assumed.
 
-<!-- Cloud / region, mandated services, on-prem, budget limits. -->
-<!-- Not covered in intake. -->
+- Public cloud in a single region close to the hotel. AWS is assumed, with managed Postgres, object storage for invoices and documents, and a CDN for the guest site.
+- No on-prem servers. The front desk uses browsers on ordinary PCs and tablets.
+- Budget is about $300–800 a month for infrastructure at launch, so managed services are preferred over self-run clusters.
+- One production environment and one staging environment.
 
 ## Delivery horizon
 
-<!-- Pilot, MVP or production — and how long it's expected to live. -->
-<!-- Not stated explicitly. The intake scoped a "v1" and kept several features out of scope "for
-     now", but did not say whether this is a pilot, MVP or production, or how long it should live. -->
+Assumed.
 
+- MVP in about 3–4 months: online booking with payment at booking, a basic back office (rooms, rates, reservations, check-in and check-out), and invoices.
+- Production hardening in months 5–6: refunds, walk-ins and deferred payment, reporting, and audit log.
+- Expected life: at least 5 years as the hotel's main booking and operations system, so maintainability matters more than speed to a demo.
 ## Team and ownership
+- A small product team of about 4–6 people: a product owner from hotel management, 2–3 full-stack developers, 1 QA, and a part-time designer.
+- One team owns the full stack and runs it in production (you build it, you run it), with an on-call rota for the guest site.
+- Hotel operations staff own rates, inventory, and content in the back office. Finance owns invoices and refund approvals.
 
-<!-- Who builds and runs which parts. -->
-<!-- Not covered in intake. -->
+## Integrations
+
+Assumed unless noted.
+
+- Payments: Stripe or Adyen (decided in the interview), using hosted fields or redirect, card pre-authorisation, refunds, and webhooks.
+- Email and SMS: a transactional email provider such as SendGrid or SES for confirmations, reminders, and invoices, plus optional SMS.
+- Identity: email and password or magic link for guests. SSO for staff through Google Workspace or Microsoft 365, with role-based access (front desk, manager, finance).
+- Phase 2: a channel manager or OTA connections (Booking.com, Expedia) to sync availability and rates, and accounting export to Xero or QuickBooks.
+- Out of scope for the MVP: door locks and keycards, POS, and housekeeping devices.
+
+## Buy vs build
+
+- Payment processing, to keep PCI scope down.
+- Email and SMS delivery.
+- Staff SSO.
+- Managed Postgres and hosting.
+- A UI component library.
+- An invoice PDF generator.
+- Phase 2: a channel manager instead of building direct OTA integrations, because those are complex and need certification.
+
+Open question: whether to just buy an off-the-shelf property management system (Cloudbeds, Mews) instead of building one. The brief implies a custom build, but that should be confirmed against cost and time to market.
